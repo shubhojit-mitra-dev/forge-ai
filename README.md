@@ -37,5 +37,5 @@ uv run python -m app.cli chat \
 - **Demo 2 (Ship-Spares Procurement Assistant):** [artifacts/demos/ship-spares/](artifacts/demos/ship-spares/) — `selected_tools: ["csv_lookup", "calculator", "current_date"]` (excludes `weather_http`), [honest_report.md](artifacts/demos/ship-spares/honest_report.md).
 
 ## Deployment (EC2 `t3.small` + Vercel)
-- **Backend (`docker-compose.yml` + `Caddyfile`):** `docker compose up -d` on EC2 `t3.small` serving FastAPI (`:8000`) + LiteLLM (`:4000`).
+- **Backend (`docker-compose.yml` + `nginx/nginx.conf`):** `docker compose up -d` on EC2 `t3.small` serving FastAPI (`:8000`) + LiteLLM (`:4000`) behind Nginx.
 - **Frontend (`client/`):** Deploy `client/` on Vercel (`forge-ai.shubhojitmitra.com`) with `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `NEXT_PUBLIC_API_URL`.
