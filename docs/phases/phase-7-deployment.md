@@ -6,7 +6,7 @@
 ## Tasks
 1. **Backend on AWS EC2 `t3.small` (2 vCPU, 2 GB RAM):**
    - Deploy `docker-compose.yml` (`litellm` + `api` services, total RAM ~400–600 MB).
-   - Configure Caddy or Nginx reverse proxy with TLS (`api.forge-ai.shubhojitmitra.com`).
+   - Configure Nginx reverse proxy (`nginx/nginx.conf`) with Certbot TLS (`api.forge-ai.shubhojitmitra.com`).
 2. **Frontend on Vercel:**
    - Connect `client/` root directory to Vercel project (`forge-ai.shubhojitmitra.com`).
    - Configure `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `NEXT_PUBLIC_API_URL`.
