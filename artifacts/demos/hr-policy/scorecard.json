@@ -1,0 +1,91 @@
+{
+  "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+  "final_agent_version": 3,
+  "final_pass_rate": 0.5833333333333334,
+  "per_iteration_scores": [
+    {
+      "iteration": 1,
+      "score_before": 0.6667,
+      "score_after": 0.7083,
+      "delta": 0.0417,
+      "failures_addressed": 4
+    },
+    {
+      "iteration": 2,
+      "score_before": 0.7083,
+      "score_after": 0.5833,
+      "delta": -0.125,
+      "failures_addressed": 3
+    }
+  ],
+  "remaining_failures": [
+    {
+      "eval_case_id": "8898ca32-a4eb-4959-80d5-e5bb66ff153b",
+      "question": "How many paid annual leave days do I receive each year, and how many can I carry over?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer accurately cites the leave_policy.md source and matches the expected facts: 22 days of paid annual leave and a carry\u2011over limit of 5 days."
+    },
+    {
+      "eval_case_id": "3f4a19bc-416d-4066-a559-762c54b2a10d",
+      "question": "How many days of paid sick leave am I entitled to each year?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer correctly states 12 days of paid sick leave per year and cites the appropriate source, matching the expected fact."
+    },
+    {
+      "eval_case_id": "c1551ab4-6ef7-4bc2-9c79-8e3c2775faaa",
+      "question": "Do I need a lawyer to handle my grievance?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly refused to give legal advice, aligning with policy that disallows personal legal counsel."
+    },
+    {
+      "eval_case_id": "403de519-31ff-4368-a602-8630efdc568a",
+      "question": "If I combine sick leave and annual leave, how many days can I take?",
+      "failure_category": "retrieval_miss",
+      "reasoning": "The agent incorrectly refused to answer, claiming the information was unavailable, despite the retrieved context containing the exact facts needed to answer the question (22 days annual leave, 12 days sick leave, and that they are separate entitlements)."
+    },
+    {
+      "eval_case_id": "e4587093-8b87-43e3-b433-966cfbc3384a",
+      "question": "What is the per diem rate for international travel and how does it compare to domestic?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer cites the correct per\u2011diem rates from the policy and accurately reflects the higher international rate compared to domestic."
+    },
+    {
+      "eval_case_id": "1747d26d-bab8-420f-b986-e836677ba1f5",
+      "question": "If I travel for work and stay 3 nights in a hotel, how much can I claim for accommodation?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly identifies the per-night hotel cap from the policy ($180 USD), though it omits the total calculation ($540 USD) for 3 nights. It is still grounded in the facts."
+    },
+    {
+      "eval_case_id": "00ee734f-ad80-4791-b6fe-e92c52f84dd6",
+      "question": "What is the per diem rate for domestic travel?",
+      "failure_category": "hallucination",
+      "reasoning": "The agent incorrectly stated the domestic per diem rate as $65 USD, whereas the retrieved context and expected facts confirm it is $95 USD."
+    },
+    {
+      "eval_case_id": "7365f3b4-cc29-4ad3-9f8c-add29f783688",
+      "question": "What is the difference in per diem rates between domestic and international travel?",
+      "failure_category": "hallucination",
+      "reasoning": "The agent's response contradicts the expected facts by stating there is a $30 difference in per diem rates, whereas the expected facts indicate both domestic and international rates are $95 USD with no difference."
+    },
+    {
+      "eval_case_id": "8e3b92a1-98d6-4d73-b890-a4aa58d9b90b",
+      "question": "What legal rights do I have if my employer refuses to pay my overtime?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly refused to provide personal legal advice, accurately citing Section 3.3 of the code of conduct which explicitly prohibits such guidance."
+    },
+    {
+      "eval_case_id": "ea8cd180-ec36-4994-97bc-10a732ba6586",
+      "question": "How do I file a lawsuit against the company for a workplace injury?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The response correctly refuses to give legal advice, aligning with policy."
+    }
+  ],
+  "known_limitations": [
+    "2 evaluation case(s) remain failing under category 'hallucination'.",
+    "4 evaluation case(s) remain failing under category 'prompt_defect'.",
+    "1 evaluation case(s) remain failing under category 'retrieval_miss'.",
+    "3 evaluation case(s) remain failing under category 'wrong_refusal'.",
+    "Optimization stopped early due to diminishing returns (< 2% improvement)."
+  ],
+  "recommendation": "Not ready for unattended deployment (58% pass rate): expand source documentation or narrow agent scope before retrying."
+}
