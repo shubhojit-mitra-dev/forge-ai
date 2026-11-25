@@ -1,4 +1,0 @@
-api.forge-ai.shubhojitmitra.com {
-    reverse_proxy api:8000
-}
-
