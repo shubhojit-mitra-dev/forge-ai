@@ -18,6 +18,21 @@ FAST_JUDGE_TIER = "fast-judge"
 PROMOTED_TIER = "orchestrator-primary"
 FAST_JUDGE_TPM_GUARD_TOKENS = 2800
 
+DEFAULT_DIRECT_TIER_MODELS: dict[str, str] = {
+    "orchestrator-primary": "gemini/gemini-3.5-flash-lite",
+    "fast-worker": "groq/openai/gpt-oss-20b",
+    "fast-judge": "groq/qwen/qwen3.8-27b",
+    "critic-reasoning": "groq/openai/gpt-oss-120b",
+    "prompt-guard": "groq/meta-llama/llama-prompt-guard-2-86m",
+}
+
+DIRECT_FALLBACK_CHAIN: tuple[str, ...] = (
+    "groq/openai/gpt-oss-20b",
+    "groq/qwen/qwen3.8-27b",
+    "groq/openai/gpt-oss-120b",
+    "gemini/gemini-3.5-flash-lite",
+)
+
 
 def _estimate_tokens(messages: list[dict[str, str]]) -> int:
     return sum(len(m.get("content", "")) for m in messages) // 4
@@ -43,9 +58,10 @@ class LiteLLMAdapter:
         litellm_base_url: str | None = None,
         api_key: str | None = None,
         timeout_seconds: float = 45.0,
-        max_retries: int = 3,
-        base_backoff_seconds: float = 1.0,
+        max_retries: int = 5,
+        base_backoff_seconds: float = 1.5,
         http_client: httpx.AsyncClient | None = None,
+        tier_model_map: dict[str, str] | None = None,
     ) -> None:
         self._base_url = litellm_base_url.rstrip("/") if litellm_base_url else None
         self._api_key = api_key
@@ -53,6 +69,7 @@ class LiteLLMAdapter:
         self._max_retries = max_retries
         self._base_backoff_seconds = base_backoff_seconds
         self._http_client = http_client
+        self._tier_model_map = tier_model_map
 
     async def complete(
         self,
@@ -173,8 +190,11 @@ class LiteLLMAdapter:
         response_format: dict[str, Any] | None,
         started_at: float,
     ) -> LLMResponse:
+        resolved_model = (
+            self._tier_model_map.get(tier, tier) if self._tier_model_map is not None else tier
+        )
         kwargs: dict[str, Any] = {
-            "model": tier,
+            "model": resolved_model,
             "messages": messages,
             "temperature": temperature,
             "max_tokens": max_tokens,
@@ -182,7 +202,39 @@ class LiteLLMAdapter:
         if response_format is not None:
             kwargs["response_format"] = response_format
 
-        raw: Any = await litellm.acompletion(**kwargs)
+        litellm.drop_params = True
+        candidates = [resolved_model]
+        if self._tier_model_map is not None:
+            for fb in DIRECT_FALLBACK_CHAIN:
+                if fb not in candidates:
+                    candidates.append(fb)
+
+        raw: Any = None
+        last_exc: Exception | None = None
+        for attempt in range(self._max_retries + 1):
+            model_to_try = candidates[attempt % len(candidates)]
+            kwargs["model"] = model_to_try
+            try:
+                raw = await litellm.acompletion(**kwargs)
+                break
+            except Exception as exc:
+                last_exc = exc
+                if self._tier_model_map is None or attempt >= self._max_retries:
+                    raise
+                delay = self._base_backoff_seconds * float(2**attempt)
+                logger.warning(
+                    "litellm_direct_retry",
+                    failed_model=model_to_try,
+                    next_model=candidates[(attempt + 1) % len(candidates)],
+                    attempt=attempt + 1,
+                    delay_seconds=delay,
+                    error=str(exc)[:180],
+                )
+                await asyncio.sleep(delay)
+
+        if raw is None:  # pragma: no cover
+            assert last_exc is not None
+            raise last_exc
         choices = getattr(raw, "choices", None) or []
         content = ""
         if choices:
