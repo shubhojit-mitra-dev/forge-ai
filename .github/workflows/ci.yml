@@ -1,0 +1,53 @@
+name: ForgeAI CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    name: Backend (Ruff, Mypy Strict, Pytest >=85%)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: uv sync --all-extras
+      - name: Lint & Format Check
+        run: |
+          uv run ruff check --config ruff.toml app tests
+          uv run ruff format --check --config ruff.toml app tests
+      - name: Static Type Check (mypy --strict)
+        run: uv run mypy --config-file mypy.ini app
+      - name: Unit & Integration Tests with Coverage Gate
+        run: uv run pytest -c pytest.ini -m "not slow" --cov=app --cov-report=term-missing --cov-fail-under=85
+
+  frontend:
+    name: Frontend (Next.js 16 Lint, TypeScript, Build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+          cache-dependency-path: client/pnpm-lock.yaml
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: ESLint
+        run: pnpm lint
+      - name: TypeScript Strict Check
+        run: pnpm exec tsc --noEmit
+      - name: Production Build
+        run: pnpm build
+

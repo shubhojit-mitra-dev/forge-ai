@@ -1,0 +1,80 @@
+# LiteLLM Proxy Gateway Configuration for ForgeAI
+# Balances rate limits across Gemini, Groq, NVIDIA NIM, and Cloudflare Workers AI
+
+model_list:
+  # ── Tier 1: Primary Orchestrator (High TPM / RPD) ─────────────────────────
+  - model_name: orchestrator-primary
+    litellm_params:
+      model: gemini/gemini-2.5-flash-lite
+      api_key: os.environ/GEMINI_API_KEY
+      rpm: 15
+      tpm: 250000
+
+  - model_name: orchestrator-primary
+    litellm_params:
+      model: nvidia_nim/nvidia/llama-3.3-nemotron-super-49b-v1
+      api_key: os.environ/NVIDIA_API_KEY
+      rpm: 35
+
+  # ── Tier 2: Fast Generation & Judge (Distributed across Groq) ──────────────
+  - model_name: fast-judge
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      api_key: os.environ/GROQ_API_KEY
+      rpm: 28
+      tpm: 7500
+
+  - model_name: fast-judge
+    litellm_params:
+      model: groq/qwen/qwen3-32b
+      api_key: os.environ/GROQ_API_KEY
+      rpm: 28
+      tpm: 7500
+
+  - model_name: fast-judge
+    litellm_params:
+      model: gemini/gemini-2.5-flash-lite
+      api_key: os.environ/GEMINI_API_KEY
+      rpm: 15
+      tpm: 250000
+
+  # ── Tier 3: Critic & Quality Escalation ────────────────────────────────────
+  - model_name: critic-reasoning
+    litellm_params:
+      model: nvidia_nim/nvidia/llama-3.3-nemotron-super-49b-v1
+      api_key: os.environ/NVIDIA_API_KEY
+      rpm: 35
+
+  - model_name: critic-reasoning
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: os.environ/GROQ_API_KEY
+      rpm: 28
+      tpm: 7500
+
+  # ── Tier 4: Prompt Injection Guard ─────────────────────────────────────────
+  - model_name: prompt-guard
+    litellm_params:
+      model: groq/meta-llama/llama-prompt-guard-2-86m
+      api_key: os.environ/GROQ_API_KEY
+      rpm: 28
+      tpm: 14000
+
+router_settings:
+  routing_strategy: "least-busy"
+  num_retries: 3
+  timeout: 45
+  allowed_fails: 3
+  cooldown_time: 60
+  fallbacks:
+    - {"orchestrator-primary": ["critic-reasoning", "fast-judge"]}
+    - {"fast-judge": ["orchestrator-primary"]}
+    - {"critic-reasoning": ["orchestrator-primary"]}
+
+litellm_settings:
+  drop_params: true
+  set_verbose: false
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
