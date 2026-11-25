@@ -1,0 +1,1 @@
+I need a procurement assistant for marine engineers to look up spare parts from our vessel inventory CSV, calculate order quantities and landed costs, and check supplier lead-time terms and customs freight rules from our procurement documents.
