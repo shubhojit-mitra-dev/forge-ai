@@ -1,0 +1,334 @@
+[
+  {
+    "id": "8898ca32-a4eb-4959-80d5-e5bb66ff153b",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "How many paid annual leave days do I receive each year, and how many can I carry over?",
+    "expected_sources": [
+      "leave_policy.md"
+    ],
+    "expected_facts": [
+      "Full-time shore staff receive 22 working days of paid annual leave per calendar year",
+      "Up to 5 unused days may be carried over into Q1 of the following year"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests retrieval of annual leave entitlement and carry\u2011over limit."
+  },
+  {
+    "id": "3b3f6e61-3a1e-4d66-b6bd-5a6e2b85b478",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What notice period is required to request four consecutive days of leave?",
+    "expected_sources": [
+      "leave_policy.md"
+    ],
+    "expected_facts": [
+      "Requests for 4 or more consecutive days require 15 working days advance notice",
+      "Line\u2011manager approval is required for such requests"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests notice\u2011period rules for longer leave requests."
+  },
+  {
+    "id": "3f4a19bc-416d-4066-a559-762c54b2a10d",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "How many days of paid sick leave am I entitled to each year?",
+    "expected_sources": [
+      "leave_policy.md"
+    ],
+    "expected_facts": [
+      "Shore staff are entitled to 12 days of paid sick leave per year",
+      "Absences exceeding 3 consecutive working days require a medical certificate"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests sick\u2011leave entitlement and medical\u2011certificate requirement."
+  },
+  {
+    "id": "77f56b65-dcbf-415a-9df0-d494eb171987",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "After completing my probation, how many days per week can I work remotely?",
+    "expected_sources": [
+      "code_of_conduct.md"
+    ],
+    "expected_facts": [
+      "Shore staff who have completed 3\u2011month probation may work remotely up to 2 days per week",
+      "Core collaboration hours are 10:00\u201316:00 local time"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests remote\u2011work eligibility and core\u2011hours."
+  },
+  {
+    "id": "a76271e3-cc91-4987-8bd1-6c701b832015",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What steps do I follow if I have a grievance that I cannot resolve with my supervisor?",
+    "expected_sources": [
+      "code_of_conduct.md"
+    ],
+    "expected_facts": [
+      "Step 1: Discuss concern with supervisor within 10 working days",
+      "Step 2: Submit written grievance to hr\u2011relations@oceanline.example within 15 working days; HR convenes panel within 7 working days"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests multi\u2011step grievance procedure."
+  },
+  {
+    "id": "91b903f7-228f-4972-8534-d7b11468e8a1",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What airfare class is allowed for flights longer than six hours?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "All domestic and international flights under 6 hours must be booked in Economy Class",
+      "Flights exceeding 6 hours may be booked in Premium Economy only with VP approval"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests airfare class guidelines for long flights."
+  },
+  {
+    "id": "87594fc4-b80b-46c6-9a9a-77404636b1b0",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "refusal",
+    "question": "Can you help me negotiate my salary with my manager?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Salary negotiation is explicitly out of scope."
+  },
+  {
+    "id": "93d5ea0f-daad-40d6-b763-e47bb905d4c5",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "refusal",
+    "question": "What tax deductions can I claim for my travel expenses?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Tax advice is out of scope."
+  },
+  {
+    "id": "c1551ab4-6ef7-4bc2-9c79-8e3c2775faaa",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "refusal",
+    "question": "Do I need a lawyer to handle my grievance?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Personal legal advice is out of scope."
+  },
+  {
+    "id": "403de519-31ff-4368-a602-8630efdc568a",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "edge",
+    "question": "If I combine sick leave and annual leave, how many days can I take?",
+    "expected_sources": [
+      "leave_policy.md"
+    ],
+    "expected_facts": [
+      "Full-time shore staff receive 22 working days of paid annual leave per calendar year",
+      "Shore staff are entitled to 12 days of paid sick leave per year",
+      "Annual leave and sick leave are separate entitlements and can be combined if needed"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests synthesis of multiple leave entitlements and boundary conditions."
+  },
+  {
+    "id": "e4587093-8b87-43e3-b433-966cfbc3384a",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "edge",
+    "question": "What is the per diem rate for international travel and how does it compare to domestic?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Daily per\u2011diem for domestic travel is $65 USD",
+      "Daily per\u2011diem for international travel is $95 USD",
+      "International per\u2011diem is $30 USD higher than domestic"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests numeric comparison across policy sections."
+  },
+  {
+    "id": "1747d26d-bab8-420f-b986-e836677ba1f5",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "edge",
+    "question": "If I travel for work and stay 3 nights in a hotel, how much can I claim for accommodation?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Standard hotel reimbursement is capped at $180 USD per night",
+      "For 3 nights, maximum claim is $540 USD"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests numeric lookup and calculation of hotel reimbursement."
+  },
+  {
+    "id": "5d62c561-7d5f-4e2f-8cbf-092c630db456",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What is the maximum per diem rate for international travel, and what types of expenses are explicitly non-reimbursable?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "The maximum per diem rate for international travel is $95 USD.",
+      "Alcohol is a non-reimbursable expense.",
+      "Personal entertainment is a non-reimbursable expense."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to extract specific monetary limits and exclusion criteria from the travel policy."
+  },
+  {
+    "id": "1cb00188-5bc8-4d03-8b0a-bc9ea090f3ab",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What is the deadline for submitting travel expense claims, and what happens if a claim is submitted after 30 days?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Expense claims must be submitted within 14 calendar days of trip completion.",
+      "Claims submitted after 30 days are automatically rejected."
+    ],
+    "should_refuse": false,
+    "rationale": "Verifies the agent can accurately report time-bound procedural rules and consequences for non-compliance."
+  },
+  {
+    "id": "00ee734f-ad80-4791-b6fe-e92c52f84dd6",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What is the per diem rate for domestic travel?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "The per diem rate for domestic travel is $95 USD."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests precise extraction of a specific data point from a list of values."
+  },
+  {
+    "id": "79e6c31f-6175-487a-ae4a-cfc0d6e00663",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "Are personal entertainment expenses covered under the travel reimbursement policy?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Personal entertainment expenses are non-reimbursable."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to identify negative constraints within the policy."
+  },
+  {
+    "id": "836660da-8dbc-4ab0-8df1-705ca355259b",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What documentation is required when submitting a travel expense claim?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Itemized receipts are required for expense claims."
+    ],
+    "should_refuse": false,
+    "rationale": "Ensures the agent correctly identifies the specific documentation requirement mentioned in the text."
+  },
+  {
+    "id": "7365f3b4-cc29-4ad3-9f8c-add29f783688",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "answerable",
+    "question": "What is the difference in per diem rates between domestic and international travel?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "The per diem rate for domestic travel is $95 USD.",
+      "The per diem rate for international travel is $95 USD.",
+      "There is no difference in the per diem rates between domestic and international travel."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to compare two data points and synthesize a conclusion (that they are equal)."
+  },
+  {
+    "id": "3e7be9fd-7e8b-4506-aaac-6f9a5a3b5c43",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "refusal",
+    "question": "Can you help me draft a counter-offer for my salary negotiation?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Salary negotiation is a must-refuse topic and is not covered in the provided policy chunks."
+  },
+  {
+    "id": "8e3b92a1-98d6-4d73-b890-a4aa58d9b90b",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "refusal",
+    "question": "What legal rights do I have if my employer refuses to pay my overtime?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Personal legal advice is a must-refuse topic and is outside the scope of the HR policy assistant."
+  },
+  {
+    "id": "ea8cd180-ec36-4994-97bc-10a732ba6586",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "refusal",
+    "question": "How do I file a lawsuit against the company for a workplace injury?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Legal advice regarding lawsuits is a must-refuse topic and is not addressed in the provided documents."
+  },
+  {
+    "id": "59339f4a-4071-419c-8ceb-dd9993770260",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "edge",
+    "question": "If I complete my trip on the 1st of the month, what is the latest date I can submit my expense claim without it being automatically rejected?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Claims submitted after 30 days are automatically rejected.",
+      "The latest date to submit a claim without automatic rejection is 30 days after trip completion."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to apply a numeric boundary condition (30 days) to a specific scenario."
+  },
+  {
+    "id": "8c143f47-41ba-457c-8ec7-653498e0048f",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "edge",
+    "question": "I submitted my expense claim 20 days after my trip. Is it still within the acceptable submission window, and what is the standard deadline?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "The standard deadline is 14 calendar days.",
+      "Claims submitted after 30 days are automatically rejected.",
+      "A claim submitted 20 days after the trip is within the 30-day rejection window but exceeds the 14-day standard deadline."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to handle a scenario that falls between the standard deadline and the automatic rejection threshold."
+  },
+  {
+    "id": "faaf8267-ea31-4fa9-a923-6241a436ea04",
+    "project_id": "27d30c53-d21b-4c58-a2a8-ceeb8bd479eb",
+    "case_type": "edge",
+    "question": "Can I claim for a bottle of wine I bought during my international trip?",
+    "expected_sources": [
+      "travel_expense_policy.md"
+    ],
+    "expected_facts": [
+      "Alcohol is a non-reimbursable expense.",
+      "The per diem rate for international travel is $95 USD."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to apply a general exclusion rule (alcohol) to a specific item (wine) in the context of international travel."
+  }
+]
