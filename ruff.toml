@@ -1,0 +1,34 @@
+target-version = "py312"
+line-length = 100
+src = ["app", "tests"]
+
+[lint]
+select = [
+    "E",      # pycodestyle errors
+    "W",      # pycodestyle warnings
+    "F",      # pyflakes
+    "I",      # isort
+    "N",      # pep8-naming
+    "UP",     # pyupgrade
+    "B",      # flake8-bugbear
+    "SIM",    # flake8-simplify
+    "ASYNC",  # flake8-async
+    "S",      # flake8-bandit (security)
+    "TCH",    # flake8-type-checking
+    "RUF",    # ruff-specific rules
+]
+ignore = [
+    "S101",   # allow assert in tests
+]
+
+[lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "S105", "S106"]
+
+[lint.isort]
+known-first-party = ["app"]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+
