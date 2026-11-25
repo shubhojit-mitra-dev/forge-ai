@@ -1,0 +1,29 @@
+[
+  {
+    "iteration": 1,
+    "score_before": 0.6666666666666666,
+    "score_after": 0.7083333333333334,
+    "failures_addressed": [
+      "8898ca32-a4eb-4959-80d5-e5bb66ff153b",
+      "3f4a19bc-416d-4066-a559-762c54b2a10d",
+      "e4587093-8b87-43e3-b433-966cfbc3384a",
+      "5d62c561-7d5f-4e2f-8cbf-092c630db456"
+    ],
+    "change_type": "system_prompt",
+    "what_changed": "Added clarification to refusal conditions in system prompt",
+    "why": "The model was refusing answers even when the information was available, causing wrong_refusal failures. By explicitly limiting refusals to only salary negotiation or personal legal advice and directing the model to state information unavailable for other out\u2011of\u2011scope queries, the model will only refuse when appropriate."
+  },
+  {
+    "iteration": 2,
+    "score_before": 0.7083333333333334,
+    "score_after": 0.5833333333333334,
+    "failures_addressed": [
+      "00ee734f-ad80-4791-b6fe-e92c52f84dd6",
+      "7365f3b4-cc29-4ad3-9f8c-add29f783688",
+      "8c143f47-41ba-457c-8ec7-653498e0048f"
+    ],
+    "change_type": "system_prompt",
+    "what_changed": "Added a strict source\u2011based answer rule to the system prompt",
+    "why": "Ensures the agent only provides information that is directly supported by the cited source, preventing hallucinations"
+  }
+]

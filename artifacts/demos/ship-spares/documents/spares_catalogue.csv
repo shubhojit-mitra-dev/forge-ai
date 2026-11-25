@@ -1,0 +1,12 @@
+part_number,description,system,unit_price_usd,stock_on_hand,min_reorder_level,lead_time_days,supplier_code
+ME-4012,Main Engine Fuel Injector Nozzle,Main Propulsion,480.00,4,6,14,SUP-WARTSILA
+ME-4088,Cylinder Liner O-Ring Kit,Main Propulsion,125.00,18,10,7,SUP-WARTSILA
+AE-2104,Aux Generator AVR Module,Power Generation,950.00,1,2,21,SUP-YANMAR
+PU-1109,Ballast Pump Mechanical Seal,Pumping Systems,310.00,3,4,10,SUP-ALFA
+PU-1145,Centrifugal Purifier Bowl Disc Set,Fuel Treatment,1420.00,2,2,18,SUP-ALFA
+ST-3301,Steering Gear Hydraulic Solenoid Valve,Steering,640.00,2,3,12,SUP-KAWASAKI
+BO-5010,Boiler Flame Scanner Sensor,Auxiliary Boiler,290.00,5,4,9,SUP-AALBORG
+CO-6022,Air Compressor Piston Ring Set,Compressed Air,175.00,9,6,8,SUP-SPERRE
+NV-7011,ECDIS Display Power Supply Unit,Navigation,780.00,1,2,15,SUP-FURUNO
+HV-8040,Engine Room Fan Drive Belt,HVAC,65.00,14,8,5,SUP-NORDIC
+

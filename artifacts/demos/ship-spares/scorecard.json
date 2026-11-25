@@ -1,0 +1,125 @@
+{
+  "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+  "final_agent_version": 2,
+  "final_pass_rate": 0.2916666666666667,
+  "per_iteration_scores": [
+    {
+      "iteration": 1,
+      "score_before": 0.375,
+      "score_after": 0.2917,
+      "delta": -0.0833,
+      "failures_addressed": 7
+    }
+  ],
+  "remaining_failures": [
+    {
+      "eval_case_id": "aed95566-b049-4e8e-962a-086d5bae95a3",
+      "question": "What is the unit price and stock on hand for part ME-4012?",
+      "failure_category": "retrieval_miss",
+      "reasoning": "The agent incorrectly refused to answer, claiming the part ME-4012 was not in the context, despite the expected facts indicating it should be answerable with a unit price of $480.00 and stock of 4."
+    },
+    {
+      "eval_case_id": "ddd6af7a-a700-4ea4-9ff9-c778e19cef12",
+      "question": "If I order 12 units of part AE-2104, what bulk discount applies and what is the discounted unit price?",
+      "failure_category": "retrieval_miss",
+      "reasoning": "The agent correctly identified the 5% bulk discount from supplier_terms.md but failed to provide the discounted unit price of $902.50 for part AE-2104, which is required by the expected facts. The retrieved context chunks did not include the specific row for AE-2104 from spares_catalogue.csv, leading to a retrieval miss."
+    },
+    {
+      "eval_case_id": "c3a68b50-42c2-4cae-990f-dbc0ee667536",
+      "question": "How many business days does customs clearance take at Rotterdam?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer cites the correct 5 business days for Rotterdam from the provided customs_freight_guide.md chunk and matches the expected fact."
+    },
+    {
+      "eval_case_id": "fe004fa2-ec0c-4264-8e46-9176e6bdc9a6",
+      "question": "What is the lead time for part PU-1145 and what is the expedited lead time if needed?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer correctly states the 18\u2011day lead time and 9\u2011day expedited time, citing the appropriate CSV and markdown sources, matching the expected facts."
+    },
+    {
+      "eval_case_id": "13ec460a-e2df-4529-81c5-6f0e649003d9",
+      "question": "What is the minimum reorder level for part HV-8040?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer cites the correct source and matches the expected fact of 8."
+    },
+    {
+      "eval_case_id": "8435e79b-ef78-4e52-be27-726ed0f22c80",
+      "question": "If I order 30 units of part BO-5010, what is the total landed cost including customs duty and freight?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer correctly cites the 10% bulk discount, 7.5% customs duty, and $150 freight from the provided documents and notes the missing unit price, staying factual and grounded."
+    },
+    {
+      "eval_case_id": "f325fb2b-ce05-474e-b7af-7eefd40cd001",
+      "question": "How many days will it take to clear customs and receive part NV-7011 if shipped from Singapore?",
+      "failure_category": "retrieval_miss",
+      "reasoning": "The agent correctly identified the 3-day customs clearance time but failed to include the 15-day lead time for part NV-7011, which is explicitly stated in the retrieved context (Chunk 5) and required by the expected facts."
+    },
+    {
+      "eval_case_id": "93c78ae4-7171-4788-a66c-1ae531987a18",
+      "question": "Can you give me medical advice on treating a broken arm?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly refused to provide medical advice, consistent with its role and without fabricating facts."
+    },
+    {
+      "eval_case_id": "ca575aff-e82a-4379-b86b-4a45baf088e3",
+      "question": "What system does part ME-4012 belong to and what is its supplier code?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly identified that part ME-4012 belongs to the Main Propulsion system and has the supplier code SUP-WARTSILA, which is directly supported by Chunk 4 from spares_catalogue.csv."
+    },
+    {
+      "eval_case_id": "71c556f2-efca-4e11-912f-ba900783b7b2",
+      "question": "What are the standard payment terms specified in the supplier documentation?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly identified the standard payment terms as Net 45 days from the bill of lading, which is explicitly stated in the retrieved context (supplier_terms.md, Section 1.3)."
+    },
+    {
+      "eval_case_id": "407778e6-f1b8-4e61-a8be-93e51394ff98",
+      "question": "What is the customs duty percentage applicable to marine spares?",
+      "failure_category": "prompt_defect",
+      "reasoning": "Answer correctly states 7.5% duty, citing the customs_freight_guide.md source."
+    },
+    {
+      "eval_case_id": "0b4d283a-823b-44ba-bdb4-6401f02dda34",
+      "question": "What bulk discount tier applies if an engineer orders exactly 10 units of a spare part?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer correctly states a 5% discount for 10 units, matching the supplier_terms.md source that specifies 10\u201324 units qualify for 5%."
+    },
+    {
+      "eval_case_id": "8fe24bea-cdb4-4712-8c10-bcf5d8501272",
+      "question": "How many total marine spare parts and assets are covered in the tabular CSV inventory catalogue?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly identified that there are 10 marine spare parts in the tabular CSV inventory catalogue, which is directly supported by the retrieved context from 'spares_catalogue.csv' and 'synthesis_prompts.md'."
+    },
+    {
+      "eval_case_id": "887bc09f-fc18-49ca-bce0-668de92b5b82",
+      "question": "Can you recommend a diet plan to help me lose weight while onboard the vessel?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The assistant correctly refused to provide a diet plan, which is outside its scope of marine procurement."
+    },
+    {
+      "eval_case_id": "006595e3-e2cb-4a4a-8cef-b26f890a216b",
+      "question": "What is the total customs clearance time and port customs lead time if clearing cargo in Singapore compared to Rotterdam?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly identified the customs clearance lead times for Singapore (3 days) and Rotterdam (5 days) based on the provided context, accurately answering the user's question."
+    },
+    {
+      "eval_case_id": "f69eab6d-1199-4764-a8c6-4b0fed6d5b66",
+      "question": "If an order qualifies for the maximum bulk discount tier, what percentage discount is applied and what is the expedite surcharge if expedited shipping is also required?",
+      "failure_category": "prompt_defect",
+      "reasoning": "The agent correctly identified the 10% bulk discount for orders of 25 or more units and the 18% expedite surcharge, both of which are explicitly stated in the retrieved context from supplier_terms.md and synthesis_prompts.md."
+    },
+    {
+      "eval_case_id": "994b5845-5af6-4cd6-8ee2-d28ada378240",
+      "question": "Considering that marine spares incur a 7.5% CIF duty, what rule determines when the $420 flat air-freight fee applies to an order?",
+      "failure_category": "wrong_refusal",
+      "reasoning": "The answer correctly states that the $420 flat air\u2011freight fee applies to emergency air\u2011freight for vessel\u2011immobilized (critical) spares, matching the expected fact and the retrieved context."
+    }
+  ],
+  "known_limitations": [
+    "8 evaluation case(s) remain failing under category 'prompt_defect'.",
+    "3 evaluation case(s) remain failing under category 'retrieval_miss'.",
+    "6 evaluation case(s) remain failing under category 'wrong_refusal'.",
+    "Optimization stopped early due to diminishing returns (< 2% improvement)."
+  ],
+  "recommendation": "Not ready for unattended deployment (29% pass rate): expand source documentation or narrow agent scope before retrying."
+}

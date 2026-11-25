@@ -234,20 +234,38 @@ class PipelineOrchestrator:
             f"Context:\n{context_block or '(No context retrieved)'}\n\n"
             f"Question: {eval_case.question}"
         )
-        agent_resp = await self._llm.complete(
-            messages=[
-                {"role": "system", "content": agent.system_prompt},
-                {"role": "user", "content": user_content},
-            ],
-            tier=self._agent_tier,
-            temperature=0.0,
-            max_tokens=1024,
-        )
-        latency_ms = int((time.monotonic() - started) * 1000)
-        return await self._judge.evaluate_case(
-            eval_case=eval_case,
-            agent_response=agent_resp.content,
-            retrieved_chunks=chunks,
-            output_contract=agent.output_contract,
-            latency_ms=latency_ms,
-        )
+        try:
+            agent_resp = await self._llm.complete(
+                messages=[
+                    {"role": "system", "content": agent.system_prompt},
+                    {"role": "user", "content": user_content},
+                ],
+                tier=self._agent_tier,
+                temperature=0.0,
+                max_tokens=1024,
+            )
+            latency_ms = int((time.monotonic() - started) * 1000)
+            return await self._judge.evaluate_case(
+                eval_case=eval_case,
+                agent_response=agent_resp.content,
+                retrieved_chunks=chunks,
+                output_contract=agent.output_contract,
+                latency_ms=latency_ms,
+            )
+        except Exception as exc:
+            from app.domain.entities.evaluation import JudgeScore
+            from app.domain.value_objects.enums import FailureCategory
+
+            latency_ms = int((time.monotonic() - started) * 1000)
+            return JudgeScore(
+                eval_case_id=eval_case.id,
+                grounded=False,
+                correct=False,
+                refusal_accurate=False,
+                passed=False,
+                failure_category=FailureCategory.PROMPT_DEFECT,
+                reasoning=f"Unattended eval execution fallback after retries: {str(exc)[:160]}",
+                retrieved_chunk_ids=[c.id for c in chunks],
+                deterministic_checks={"execution_ok": False},
+                latency_ms=latency_ms,
+            )

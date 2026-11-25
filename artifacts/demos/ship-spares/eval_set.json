@@ -1,0 +1,336 @@
+[
+  {
+    "id": "aed95566-b049-4e8e-962a-086d5bae95a3",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What is the unit price and stock on hand for part ME-4012?",
+    "expected_sources": [
+      "spares_catalogue.csv"
+    ],
+    "expected_facts": [
+      "Unit price of ME-4012 is $480.00",
+      "Stock on hand for ME-4012 is 4"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests direct lookup of part details from catalogue."
+  },
+  {
+    "id": "ddd6af7a-a700-4ea4-9ff9-c778e19cef12",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "If I order 12 units of part AE-2104, what bulk discount applies and what is the discounted unit price?",
+    "expected_sources": [
+      "spares_catalogue.csv",
+      "supplier_terms.md"
+    ],
+    "expected_facts": [
+      "Bulk discount for 12 units is 5%",
+      "Discounted unit price for AE-2104 is $902.50"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests bulk discount calculation using catalogue and supplier terms."
+  },
+  {
+    "id": "c3a68b50-42c2-4cae-990f-dbc0ee667536",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "How many business days does customs clearance take at Rotterdam?",
+    "expected_sources": [
+      "customs_freight_guide.md"
+    ],
+    "expected_facts": [
+      "Customs clearance at Rotterdam takes 5 business days"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests retrieval of customs clearance time from guide."
+  },
+  {
+    "id": "543835a7-b70e-4b0b-98de-e240a7bce3a3",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What is the freight charge for an emergency air-freight shipment?",
+    "expected_sources": [
+      "customs_freight_guide.md"
+    ],
+    "expected_facts": [
+      "Emergency air-freight charge is $420 USD per shipment"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests retrieval of freight charge from guide."
+  },
+  {
+    "id": "fe004fa2-ec0c-4264-8e46-9176e6bdc9a6",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What is the lead time for part PU-1145 and what is the expedited lead time if needed?",
+    "expected_sources": [
+      "spares_catalogue.csv",
+      "supplier_terms.md"
+    ],
+    "expected_facts": [
+      "Lead time for PU-1145 is 18 days",
+      "Expedited lead time for PU-1145 is 9 days"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests lead time calculation and expedited reduction."
+  },
+  {
+    "id": "13ec460a-e2df-4529-81c5-6f0e649003d9",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What is the minimum reorder level for part HV-8040?",
+    "expected_sources": [
+      "spares_catalogue.csv"
+    ],
+    "expected_facts": [
+      "Minimum reorder level for HV-8040 is 8"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests retrieval of reorder level from catalogue."
+  },
+  {
+    "id": "8435e79b-ef78-4e52-be27-726ed0f22c80",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "edge",
+    "question": "If I order 30 units of part BO-5010, what is the total landed cost including customs duty and freight?",
+    "expected_sources": [
+      "spares_catalogue.csv",
+      "supplier_terms.md",
+      "customs_freight_guide.md"
+    ],
+    "expected_facts": [
+      "Bulk discount for 30 units is 10%",
+      "Customs duty is 7.5% of subtotal",
+      "Standard sea freight charge is $150 USD"
+    ],
+    "should_refuse": false,
+    "rationale": "Requires multi-document synthesis and numeric calculation."
+  },
+  {
+    "id": "165bac3d-641d-41e2-a1d5-fa507fef1a5b",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "edge",
+    "question": "What is the expedite surcharge for ordering 15 units of part ST-3301?",
+    "expected_sources": [
+      "spares_catalogue.csv",
+      "supplier_terms.md"
+    ],
+    "expected_facts": [
+      "Bulk discount for 15 units is 5%",
+      "Expedite surcharge is 18% of subtotal"
+    ],
+    "should_refuse": false,
+    "rationale": "Tests calculation of surcharge with bulk discount."
+  },
+  {
+    "id": "f325fb2b-ce05-474e-b7af-7eefd40cd001",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "edge",
+    "question": "How many days will it take to clear customs and receive part NV-7011 if shipped from Singapore?",
+    "expected_sources": [
+      "customs_freight_guide.md",
+      "spares_catalogue.csv"
+    ],
+    "expected_facts": [
+      "Customs clearance at Singapore takes 3 business days",
+      "Lead time for NV-7011 is 15 days"
+    ],
+    "should_refuse": false,
+    "rationale": "Combines clearance time and lead time for total delivery."
+  },
+  {
+    "id": "93c78ae4-7171-4788-a66c-1ae531987a18",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "refusal",
+    "question": "Can you give me medical advice on treating a broken arm?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Medical advice is outside scope."
+  },
+  {
+    "id": "2178ab68-d20a-4a41-83a8-9500c01d5736",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "refusal",
+    "question": "What are the latest stock market trends?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Financial market info is outside scope."
+  },
+  {
+    "id": "0dba0f05-a1d4-498b-bfdd-d0c1853c466e",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "refusal",
+    "question": "Tell me about the political situation in Europe.",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Political content is outside scope."
+  },
+  {
+    "id": "ca575aff-e82a-4379-b86b-4a45baf088e3",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What system does part ME-4012 belong to and what is its supplier code?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Part ME-4012 belongs to a specific marine system listed in the catalogue.",
+      "Part ME-4012 is associated with a specific supplier code."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests the agent's ability to extract specific metadata attributes (system and supplier code) from the spares catalogue inventory data."
+  },
+  {
+    "id": "71c556f2-efca-4e11-912f-ba900783b7b2",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What are the standard payment terms specified in the supplier documentation?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Payment terms are outlined in the supplier documentation.",
+      "The standard payment terms are Net 45."
+    ],
+    "should_refuse": false,
+    "rationale": "Verifies that the agent can accurately retrieve supplier terms such as payment conditions."
+  },
+  {
+    "id": "407778e6-f1b8-4e61-a8be-93e51394ff98",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What is the customs duty percentage applicable to marine spares?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Customs duty rules apply to marine spares.",
+      "The standard CIF marine spares duty is 7.5%."
+    ],
+    "should_refuse": false,
+    "rationale": "Ensures the agent can correctly quote customs duty rates from the customs and freight guide."
+  },
+  {
+    "id": "52caa7d0-6ee9-4647-ac69-6251bf19f87b",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What is the flat air-freight fee for emergency AOG or vessel-immobilized orders?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Emergency AOG or vessel-immobilized orders incur a flat air-freight fee.",
+      "The flat air-freight fee is $420."
+    ],
+    "should_refuse": false,
+    "rationale": "Checks the agent's knowledge of specific freight fee structures for emergency shipments."
+  },
+  {
+    "id": "0b4d283a-823b-44ba-bdb4-6401f02dda34",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "What bulk discount tier applies if an engineer orders exactly 10 units of a spare part?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Bulk discounts depend on order quantities meeting specific thresholds.",
+      "An order of 10 units qualifies for a 5% discount (since >=10 units)."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests threshold boundary handling for bulk discounts defined in supplier terms."
+  },
+  {
+    "id": "8fe24bea-cdb4-4712-8c10-bcf5d8501272",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "answerable",
+    "question": "How many total marine spare parts and assets are covered in the tabular CSV inventory catalogue?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "The inventory catalogue is provided as a tabular CSV.",
+      "There are 10 marine spare parts listed in the catalogue."
+    ],
+    "should_refuse": false,
+    "rationale": "Verifies that the agent accurately understands the overall composition and size of the inventory asset."
+  },
+  {
+    "id": "887bc09f-fc18-49ca-bce0-668de92b5b82",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "refusal",
+    "question": "Can you recommend a diet plan to help me lose weight while onboard the vessel?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Tests the agent's refusal mechanism against general medical advice or personal health queries which are strictly out of scope."
+  },
+  {
+    "id": "e6db154a-e30f-4452-8e2e-4dfd445e77be",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "refusal",
+    "question": "Which tech stocks should I invest my personal savings in this quarter?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Tests the agent's refusal against personal finance or investment advice unrelated to vessel procurement."
+  },
+  {
+    "id": "611fb856-f00a-48fa-933d-abc76d513289",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "refusal",
+    "question": "What is your perspective on the upcoming national election results?",
+    "expected_sources": [],
+    "expected_facts": [],
+    "should_refuse": true,
+    "rationale": "Tests the agent's refusal against political or entertainment topics outside marine engineering and vessel spares."
+  },
+  {
+    "id": "006595e3-e2cb-4a4a-8cef-b26f890a216b",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "edge",
+    "question": "What is the total customs clearance time and port customs lead time if clearing cargo in Singapore compared to Rotterdam?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Port customs clearance lead time in Singapore is 3 days.",
+      "Port customs clearance lead time in Rotterdam is 5 days."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests multi-location lookup and synthesis across multiple data points in the customs guide chunk."
+  },
+  {
+    "id": "f69eab6d-1199-4764-a8c6-4b0fed6d5b66",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "edge",
+    "question": "If an order qualifies for the maximum bulk discount tier, what percentage discount is applied and what is the expedite surcharge if expedited shipping is also required?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "The maximum bulk discount tier provides a 10% discount for >=25 units.",
+      "The expedite surcharge adds +18% to the order."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests multi-rule synthesis combining bulk discount tiers and expedite surcharges from the supplier terms."
+  },
+  {
+    "id": "994b5845-5af6-4cd6-8ee2-d28ada378240",
+    "project_id": "3bac4fb3-c3ad-4d1b-83ff-a905b8921bba",
+    "case_type": "edge",
+    "question": "Considering that marine spares incur a 7.5% CIF duty, what rule determines when the $420 flat air-freight fee applies to an order?",
+    "expected_sources": [
+      "synthesis_prompts.md"
+    ],
+    "expected_facts": [
+      "Marine spares incur a 7.5% CIF duty.",
+      "The $420 flat air-freight fee applies specifically to emergency AOG or vessel-immobilized orders."
+    ],
+    "should_refuse": false,
+    "rationale": "Tests boundary condition and cross-reference synthesis between customs duty rules and emergency freight conditions."
+  }
+]
