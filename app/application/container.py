@@ -11,7 +11,7 @@ from app.application.services.reporter_service import ReporterService
 from app.config import Settings, get_settings
 from app.infrastructure.cache.ttl_cache import InMemoryTTLCache
 from app.infrastructure.llm.embeddings import CloudflareEmbeddingsAdapter
-from app.infrastructure.llm.litellm_adapter import LiteLLMAdapter
+from app.infrastructure.llm.litellm_adapter import DEFAULT_DIRECT_TIER_MODELS, LiteLLMAdapter
 from app.infrastructure.parsers import CsvParser, OverlapChunker, PdfParser, TextParser
 from app.infrastructure.tools.registry import ToolRegistry, get_tool_registry
 
@@ -50,12 +50,13 @@ def build_container() -> AppContainer:
         default_ttl_seconds=max(1, settings.forge_cache_ttl_seconds),
     )
     llm_gateway = LiteLLMAdapter(
-        litellm_base_url=settings.litellm_base_url,
+        litellm_base_url=settings.litellm_base_url or None,
         api_key=settings.litellm_master_key or None,
+        tier_model_map=DEFAULT_DIRECT_TIER_MODELS,
     )
     embedding_gateway = CloudflareEmbeddingsAdapter(
         account_id=settings.cloudflare_account_id,
-        api_token=settings.cloudflare_api_token,
+        api_token=settings.cloudflare_api_key,
     )
     tool_registry = get_tool_registry()
     parsers = ParserBundle(
